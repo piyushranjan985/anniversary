@@ -3,41 +3,44 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>11 Years ❤️</title>
+<title>11 Years of Us ❤️</title>
+
 <style>
   body {
-    font-family: 'Arial', sans-serif;
-    background: linear-gradient(135deg, #ff758c, #ff7eb3);
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: linear-gradient(135deg, #ff5f8a, #ff85b3);
     color: #fff;
     text-align: center;
-    padding: 20px;
-    overflow: hidden;
   }
 
   .container {
-    max-width: 600px;
+    padding: 20px;
+    max-width: 700px;
     margin: auto;
-    margin-top: 10vh;
   }
 
   h1 {
-    font-size: 26px;
-    margin-bottom: 30px;
+    font-size: 22px;
+    line-height: 1.4;
   }
 
   .options {
     position: relative;
-    height: 300px;
+    width: 100%;
+    height: 260px;
+    margin-top: 25px;
+    border-radius: 20px;
   }
 
   button {
-    padding: 12px 20px;
+    padding: 14px 22px;
     font-size: 16px;
+    border-radius: 30px;
     border: none;
-    border-radius: 25px;
     cursor: pointer;
     position: absolute;
-    transition: transform 0.1s;
+    max-width: 90%;
   }
 
   .runaway {
@@ -50,92 +53,53 @@
     color: #fff;
   }
 
+  .photos {
+    display: flex;
+    gap: 10px;
+    overflow-x: auto;
+    margin-top: 20px;
+  }
+
+  .photos img {
+    height: 160px;
+    border-radius: 15px;
+  }
+
   .message {
     font-size: 20px;
-    margin-top: 40px;
+    margin-top: 30px;
+    line-height: 1.5;
   }
 </style>
 </head>
 
 <body>
+
+<audio id="bgMusic" loop>
+  <source src="music.mp3" type="audio/mpeg">
+</audio>
+
 <div class="container" id="app">
   <h1>
-    Hey Biwi! ❤️  
-    <br><br>
-    Its been 11 years loving you, fucxxxng you and fighting with you.  
-    <br><br>
-    How many years more are you willing to tolerate me?
+    Hey Biwi ❤️<br><br>
+    11 years of loving you, desiring you 😏  
+    and fighting like true soulmates.<br><br>
+    So tell me honestly…<br>
+    how many more years will you tolerate me?
   </h1>
 
-  <div class="options">
+  <div class="options" id="q1">
     <button class="runaway">1 year</button>
     <button class="runaway">5 years</button>
     <button class="runaway">10 years</button>
     <button class="runaway">20 years</button>
-    <button class="good" style="left: 40%; top: 200px;" onclick="forever()">Forever</button>
+
+    <button class="good" style="left:30%; top:190px;" onclick="forever()">
+      Forever ❤️
+    </button>
   </div>
 </div>
 
 <script>
-  const runawayButtons = document.querySelectorAll('.runaway');
-
-  runawayButtons.forEach(btn => {
-    moveButton(btn);
-
-    btn.addEventListener('mouseenter', () => moveButton(btn));
-    btn.addEventListener('touchstart', () => moveButton(btn));
-  });
-
-  function moveButton(button) {
-    const x = Math.random() * (window.innerWidth - 150);
-    const y = Math.random() * (window.innerHeight - 150);
-    button.style.left = `${x}px`;
-    button.style.top = `${y}px`;
-  }
-
-  function forever() {
-    document.getElementById('app').innerHTML = `
-      <h1>
-        Oh I got it. You can't get enough of me haan 😏  
-        <br><br>
-        Great choice btw! you got a great choice.  
-        <br>
-        Let's continue that forever if you are so keen ;)
-        <br><br>
-        Now tell me how do you wanna celebrate this special day?
-      </h1>
-
-      <div class="options">
-        <button class="good" style="left: 20%; top: 150px;" onclick="trip()">
-          Let's pack our bags for an overnight stay somewhere.  
-          Let's celebrate our wedding night ;) again there
-        </button>
-
-        <button class="runaway">Let's be lazy and do nothing</button>
-      </div>
-    `;
-
-    const lazyBtn = document.querySelector('.runaway');
-    moveButton(lazyBtn);
-    lazyBtn.addEventListener('mouseenter', () => moveButton(lazyBtn));
-    lazyBtn.addEventListener('touchstart', () => moveButton(lazyBtn));
-  }
-
-  function trip() {
-    document.getElementById('app').innerHTML = `
-      <div class="message">
-        Again a great choice! You are killing it today 😘  
-        <br><br>
-        Pack your bags.  
-        <br>
-        Don't forget to pack a Saree and couple of thongs.  
-        <br>
-        I know your hubby loves it 😍  
-        <br><br>
-        Don't forget to take our son as well ❤️
-      </div>
-    `;
-  }
-</script>
-</body>
-</html>
+  function moveInside(btn, container) {
+    const
