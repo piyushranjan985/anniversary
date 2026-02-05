@@ -26,9 +26,10 @@
   }
 
   .options {
-    position: relative;
-    width: 100%;
-    height: 260px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 12px;
     margin-top: 30px;
   }
 
@@ -38,9 +39,8 @@
     border-radius: 25px;
     border: none;
     cursor: pointer;
-    position: absolute;
-    transition: transform 0.15s ease;
     white-space: nowrap;
+    transition: transform 0.15s ease;
   }
 
   .runaway {
@@ -51,7 +51,6 @@
   .good {
     background: #2ecc71;
     color: white;
-    z-index: 2;
   }
 
   .photos {
@@ -59,6 +58,7 @@
     gap: 10px;
     overflow-x: auto;
     margin-top: 20px;
+    justify-content: center;
   }
 
   .photos img {
@@ -88,49 +88,35 @@
     How many more years will you tolerate me?
   </h1>
 
+  <!-- ALL OPTIONS START CLOSE TOGETHER -->
   <div class="options" id="q1">
-    <!-- Forever in center -->
-    <button class="good" id="foreverBtn" style="left:35%; top:140px;" onclick="forever()">
-      Forever ❤️
-    </button>
-
-    <!-- All wrong options START CLOSE to Forever -->
-    <button class="runaway" style="left:20%; top:140px;">1 year</button>
-    <button class="runaway" style="left:50%; top:100px;">5 years</button>
-    <button class="runaway" style="left:50%; top:180px;">10 years</button>
-    <button class="runaway" style="left:20%; top:180px;">20 years</button>
+    <button class="runaway">1 year</button>
+    <button class="runaway">5 years</button>
+    <button class="good" onclick="forever()">Forever ❤️</button>
+    <button class="runaway">10 years</button>
+    <button class="runaway">20 years</button>
   </div>
 </div>
 
 <script>
-  function escape(btn) {
-    const container = btn.parentElement;
-    const cRect = container.getBoundingClientRect();
-
-    const maxX = cRect.width - btn.offsetWidth - 10;
-    const maxY = cRect.height - btn.offsetHeight - 10;
-
-    let x, y;
-    do {
-      x = Math.random() * maxX;
-      y = Math.random() * maxY;
-    } while (
-      Math.abs(x - btn.offsetLeft) < 80 &&
-      Math.abs(y - btn.offsetTop) < 50
-    );
-
-    btn.style.left = x + 'px';
-    btn.style.top = y + 'px';
+  function dodge(btn) {
+    const x = (Math.random() * 200 - 100);
+    const y = (Math.random() * 120 - 60);
+    btn.style.transform = `translate(${x}px, ${y}px)`;
   }
 
-  document.querySelectorAll('.runaway').forEach(btn => {
-    btn.addEventListener('mouseenter', () => escape(btn));
-    btn.addEventListener('mousedown', () => escape(btn));
-    btn.addEventListener('touchstart', (e) => {
-      e.preventDefault();
-      escape(btn);
+  function initRunaways(scope=document) {
+    scope.querySelectorAll('.runaway').forEach(btn => {
+      btn.addEventListener('mouseenter', () => dodge(btn));
+      btn.addEventListener('mousedown', () => dodge(btn));
+      btn.addEventListener('touchstart', (e) => {
+        e.preventDefault();
+        dodge(btn);
+      });
     });
-  });
+  }
+
+  initRunaways();
 
   function forever() {
     document.getElementById('bgMusic').play();
@@ -153,25 +139,14 @@
       </h1>
 
       <div class="options" id="q2">
-        <button class="good" style="left:30%; top:160px;" onclick="trip()">
-          Let’s pack our bags 🧳<br>
-          and relive our wedding night 😉
-        </button>
-
-        <button class="runaway" style="left:30%; top:100px;">
-          Let’s be lazy and do nothing
+        <button class="runaway">Let’s be lazy and do nothing</button>
+        <button class="good" onclick="trip()">
+          Let’s pack our bags 🧳 and relive our wedding night 😉
         </button>
       </div>
     `;
 
-    document.querySelectorAll('.runaway').forEach(btn => {
-      btn.addEventListener('mouseenter', () => escape(btn));
-      btn.addEventListener('mousedown', () => escape(btn));
-      btn.addEventListener('touchstart', (e) => {
-        e.preventDefault();
-        escape(btn);
-      });
-    });
+    initRunaways(document.getElementById('app'));
   }
 
   function trip() {
